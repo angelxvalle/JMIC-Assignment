@@ -1,0 +1,66 @@
+<h1>Edit Employee</h1>
+<script src="bootstrap-datepicker.js"></script>
+
+<div class="container" style="border: 2px solid black; padding: 30px;">
+    <form onsubmit="POST">
+
+
+        <div class="form-row">
+          <div class="col">
+            <label for="firstName">First Name:</label>
+            <input id="firstName" type="text" class="form-control" name="firstname" [(ngModel)]="firstname" required>
+          </div>
+          <div class="col">
+            <label for="lastName">Last Name:</label>
+            <input id="lastName" type="text" class="form-control" name="lastname" [(ngModel)]="lastname" required>
+          </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="jobid">Designation</label>
+                <select id="jobid" class="form-control" name="jobid" [(ngModel)]="jobid" required>
+                    <!-- <option selected></option> -->
+                    <option *ngFor="let job of jobs" [ngValue]=job.jobid>{{job.designation}}</option>
+                </select> 
+            </div>
+            <div class="form-group col-md-4">
+                    <!-- <input type="date" name="date" [(ngModel)]="date">  -->
+                <mat-form-field>
+                    <input matInput [matDatepicker]="myDatePicker" name="date" [(ngModel)]="date" required>
+                    <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #myDatePicker></mat-datepicker>
+                </mat-form-field>
+                 
+            </div>
+        </div>
+
+
+        <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputState">Project</label>
+                    <select id="inputState" class="form-control" name="projectid" [(ngModel)]="projectid" required>
+                        <!-- <option selected></option> -->
+                    <option *ngFor="let project of projects" value={{project.projectid}}>{{project.description}}</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" name="status" [(ngModel)]="status">
+                    <label class="custom-control-label" for="customSwitch1">Status</label>
+                </div>        
+            </div>
+
+            <div class="form-row">
+                <button type="button" style="border: 1px solid black" class="btn `btn-light" routerLink="/">Cancel</button>
+                <button type="button" style="border: 1px solid black" class="btn `btn-light" (click)="handleAddEmployee()">Save</button>
+            </div>
+
+
+      </form>
+
+</div>

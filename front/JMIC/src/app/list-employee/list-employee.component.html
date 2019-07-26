@@ -1,0 +1,53 @@
+<div class="container" style="display: flex; justify-content: space-between">
+    <h2 style="display: inline">Employee Portal:</h2>
+    <a class="btn btn-primary" role="button"  routerLink="/A/newEmployee" >Create New</a>
+</div>
+
+
+<div class="container" style="padding-top: 2vh">
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        
+        <ng-container matColumnDef="employeid">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let employees" [routerLink]="['/U/', employees.employeid]">{{employees.employeid}}</mat-cell>
+        </ng-container>
+      
+       
+        <ng-container matColumnDef="firstname">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let employees" [routerLink]="['/U/', employees.employeid]"> {{employees.firstname}} </mat-cell>
+        </ng-container>
+      
+       
+        <ng-container matColumnDef="lastname">
+          <mat-header-cell *matHeaderCellDef>lastname</mat-header-cell>
+          <mat-cell *matCellDef="let employees" [routerLink]="['/U/', employees.employeid]"> {{employees.lastname}} </mat-cell>
+        </ng-container>
+      
+        
+        <ng-container matColumnDef="jobid">
+          <mat-header-cell *matHeaderCellDef>jobid</mat-header-cell>
+          <mat-cell *matCellDef="let employees" [routerLink]="['/U/', employees.employeid]"> {{employees.jobid}} </mat-cell>
+        </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+    </mat-table>
+    <mat-paginator
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex"
+        (page)="onPageChange($event)"> 
+    </mat-paginator>
+
+</div>
+
+
+
+    
+
+
+
