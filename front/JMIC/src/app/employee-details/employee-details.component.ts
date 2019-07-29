@@ -97,6 +97,58 @@ handleAddEmployee = () => {
   );
 }
 
+handleUpdateEmployee = () => {
+
+
+  
+  console.log(`EmployeeID ${this.employeid}`);
+  console.log(`First Name ${this.firstname}`);
+  console.log(`Last Name ${this.lastname}`);
+  console.log(`Job ID ${this.jobid}`);
+  console.log(`Project ID ${this.projectid}`);
+  console.log(`Status ${this.status}`);
+  console.log(`Date ${this.date.toISOString().slice(0, 10)}`);
+  
+  
+
+  if (typeof(this.firstname) == "undefined") {
+    alert("Please add first name!");
+    return;
+  }
+  if (typeof(this.lastname) == "undefined") {
+    alert("Please add last name!");
+    return;
+  }
+  if (typeof(this.jobid) == "undefined") {
+    alert("Please add designation!");
+    return;
+  }
+  if (typeof(this.projectid) == "undefined") {
+    alert("Please add project!");
+    return;
+  }
+  if (typeof(this.date) == "undefined") {
+    alert("Please add date!");
+    return;
+  }
+  if (typeof(this.employeid) == "undefined") {
+    alert("Employee ID is undefined!");
+    return;
+  }
+ 
+  let mystatus = 0;
+  if(this.status){
+    mystatus = 1;
+  }  
+  
+  this.updateEmployee(this.employeid, this.firstname, this.lastname, this.jobid, this.projectid, this.date, mystatus).then(
+    res=>{
+      console.log("inserted? ",res);
+    }
+  );
+}
+
+
 
 getAllProjects = async () => {
   const rawResponse = await fetch(this.APIURL +'ListProjects', {
@@ -187,7 +239,7 @@ RegisterEmployee = async (
     status: number
     ) =>{
     const rawResponse =await fetch(this.APIURL +'AddRemoveEmployee', {
-      method: 'PUT',
+      method: 'POST',
       headers: {
       'Access-Control-Allow-Origin':'*',
       //'Content-Type': 'multipart/form-data ', 
@@ -216,6 +268,10 @@ RegisterEmployee = async (
     return content;
     }
 
+
+
+
+
     public currentLink: string = "";
 
 
@@ -226,7 +282,6 @@ RegisterEmployee = async (
   ngOnInit() {
 
     let myempid;
-    let counter;
 
     this.getAllJobs().then(res=>{
       console.log(res);
@@ -246,6 +301,7 @@ RegisterEmployee = async (
       this.getEmployeeByID(myempid).then(res=>{
         console.log("employee info here ==>",res.GetEmployee);
        // counter = this.jobs[res.GetEmployee[0].jobid].designation;
+      
         this.firstname = res.GetEmployee[0].firstname;
         this.lastname = res.GetEmployee[0].lastname;
         // console.log(`omra ${res.GetEmployee[0].jobid}`);
@@ -270,14 +326,7 @@ RegisterEmployee = async (
 
     this.currentLink = this.router.url; 
     console.log(this.currentLink)
-    if (this.currentLink == 'A/newEmployee')
-    {
-      // console.log("This is the add employee scenario!");
-    }
-    else {
-      // console.log("This is the update employee scenario!");
-      console.log()
-    }
+  
     
    
   }
